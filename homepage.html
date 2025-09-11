@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Kochi Metro Worker Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #0077b6, #00b4d8);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .login-box {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 30px;
+      border-radius: 10px;
+      width: 300px;
+      text-align: center;
+    }
+    h2 {
+      margin-bottom: 20px;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 5px;
+    }
+    button {
+      background: #00b4d8;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background: #0096c7;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <h2>Kochi Metro Login</h2>
+    <form onsubmit="return loginUser(event)">
+      <select id="role">
+        <option value="">Select Role</option>
+        <option value="rolling">Rolling Stock</option>
+        <option value="signalling">Signalling</option>
+        <option value="telecom">Telecom</option>
+        <option value="branding">Branding</option>
+        <option value="cleaning">Cleaning</option>
+        <option value="stabling">Stabling</option>
+        <option value="supervisor">Supervisor</option>
+      </select>
+      <input type="text" id="username" placeholder="Username" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+    </form>
+    <p id="error" style="color:red; display:none;"></p>
+  </div>
+
+  <script>
+    const users = {
+      "rolling":    {username:"rolling1", password:"pass123", redirect:"rolling.html"},
+      "signalling": {username:"signal1",  password:"pass123", redirect:"signalling.html"},
+      "telecom":    {username:"telecom1", password:"pass123", redirect:"telecom.html"},
+      "branding":   {username:"brand1",   password:"pass123", redirect:"branding.html"},
+      "cleaning":   {username:"clean1",   password:"pass123", redirect:"cleaning.html"},
+      "stabling":   {username:"stable1",  password:"pass123", redirect:"stabling.html"},
+      "supervisor": {username:"admin",    password:"admin123",redirect:"results.html"}
+    };
+
+    function loginUser(e) {
+      e.preventDefault();
+      const role = document.getElementById("role").value;
+      const uname = document.getElementById("username").value;
+      const pwd = document.getElementById("password").value;
+      const error = document.getElementById("error");
+
+      if (users[role] && users[role].username === uname && users[role].password === pwd) {
+        window.location.href = users[role].redirect;
+      } else {
+        error.innerText = "Invalid credentials. Try again.";
+        error.style.display = "block";
+      }
+    }
+  </script>
+</body>
+</html>
