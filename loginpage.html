@@ -4,40 +4,115 @@
   <meta charset="UTF-8">
   <title>Kochi Metro Worker Login</title>
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to right, #0077b6, #00b4d8);
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: linear-gradient(135deg, #4facfe, #43e97b, #fa709a);
       color: #fff;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
+      background-size: 300% 300%;
+      animation: gradientBG 10s ease infinite;
     }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
     .login-box {
-      background: rgba(0, 0, 0, 0.7);
-      padding: 30px;
-      border-radius: 10px;
-      width: 300px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      padding: 40px 30px;
+      border-radius: 15px;
+      width: 350px;
       text-align: center;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
+
+    .login-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    }
+
     h2 {
-      margin-bottom: 20px;
+      margin-bottom: 25px;
+      font-size: 1.8rem;
+      letter-spacing: 1px;
+      color: #fff;
     }
+
     input, select, button {
       width: 100%;
-      padding: 10px;
-      margin: 8px 0;
+      padding: 12px;
+      margin: 10px 0;
       border: none;
-      border-radius: 5px;
+      border-radius: 8px;
+      font-size: 1rem;
+      outline: none;
+      transition: all 0.3s ease;
     }
+
+    input, select {
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+    }
+
+    input::placeholder {
+      color: #ddd;
+    }
+
+    select option {
+      color: #000;
+    }
+
+    input:focus, select:focus {
+      background: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+    }
+
     button {
-      background: #00b4d8;
-      color: white;
+      background: #ff6bcb;
+      color: #fff;
       cursor: pointer;
       font-weight: bold;
+      letter-spacing: 1px;
+      transition: background 0.3s ease, transform 0.2s ease;
     }
+
     button:hover {
-      background: #0096c7;
+      background: #e056b1;
+      transform: scale(1.05);
+    }
+
+    #error {
+      margin-top: 10px;
+      color: #ff4d6d;
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    @media (max-width: 500px) {
+      .login-box {
+        width: 90%;
+        padding: 30px 20px;
+      }
+      h2 {
+        font-size: 1.5rem;
+      }
+      input, select, button {
+        font-size: 0.95rem;
+        padding: 10px;
+      }
     }
   </style>
 </head>
@@ -45,7 +120,7 @@
   <div class="login-box">
     <h2>Kochi Metro Login</h2>
     <form onsubmit="return loginUser(event)">
-      <select id="role">
+      <select id="role" required>
         <option value="">Select Role</option>
         <option value="rolling">Rolling Stock</option>
         <option value="signalling">Signalling</option>
@@ -59,7 +134,7 @@
       <input type="password" id="password" placeholder="Password" required>
       <button type="submit">Login</button>
     </form>
-    <p id="error" style="color:red; display:none;"></p>
+    <p id="error"></p>
   </div>
 
   <script>
@@ -76,14 +151,14 @@
     function loginUser(e) {
       e.preventDefault();
       const role = document.getElementById("role").value;
-      const uname = document.getElementById("username").value;
-      const pwd = document.getElementById("password").value;
+      const uname = document.getElementById("username").value.trim();
+      const pwd = document.getElementById("password").value.trim();
       const error = document.getElementById("error");
 
       if (users[role] && users[role].username === uname && users[role].password === pwd) {
         window.location.href = users[role].redirect;
       } else {
-        error.innerText = "Invalid credentials. Try again.";
+        error.innerText = "❌ Invalid credentials. Try again.";
         error.style.display = "block";
       }
     }
