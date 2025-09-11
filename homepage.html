@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Kochi Metro Induction Planner</title>
+  <style>
+    :root {
+      --primary: #02569b;
+      --secondary: #35ab6a;
+      --accent: #f9c802;
+      --light: #f4f4f4;
+      --dark-text: #232323;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--light);
+      color: var(--dark-text);
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--primary);
+      color: #fff;
+      padding: 0.75em 2em;
+    }
+    .logo {
+      font-weight: bold;
+      font-size: 1.3em;
+      letter-spacing: 1px;
+    }
+    nav {
+      display: flex;
+      gap: 2em;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1em;
+      font-weight: 500;
+    }
+    .hero {
+      padding: 2em 1em 2em 1em;
+      background: linear-gradient(100deg, var(--primary) 60%, var(--secondary) 100%);
+      color: #fff;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 2.2em;
+      margin: 0.2em 0 0.4em 0;
+    }
+    .hero p {
+      font-size: 1.2em;
+      margin-bottom: 1.3em;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cta {
+      display: flex;
+      justify-content: center;
+      gap: 1em;
+      margin-top: 1em;
+      flex-wrap: wrap;
+    }
+    .cta button {
+      padding: 0.9em 2em;
+      border: none;
+      background: var(--accent);
+      color: var(--dark-text);
+      font-weight: bold;
+      border-radius: 0.3em;
+      cursor: pointer;
+      font-size: 1.1em;
+      transition: background 0.2s;
+    }
+    .cta button:hover {
+      background: var(--secondary);
+      color: #fff;
+    }
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2em;
+      padding: 2em 2em 2em 2em;
+      background: #fff;
+    }
+    .feature-card {
+      background: var(--light);
+      border-radius: 0.7em;
+      padding: 1.4em;
+      box-shadow: 0 2px 10px rgba(0,42,100,0.07);
+      border-left: 6px solid var(--secondary);
+      display: flex;
+      flex-direction: column;
+      gap: 0.8em;
+    }
+    .feature-card h3 {
+      margin: 0;
+      font-size: 1.15em;
+      color: var(--primary);
+      font-weight: bold;
+    }
+    .feature-card p {
+      margin: 0;
+      font-size: 0.98em;
+      color: var(--dark-text);
+    }
+    .testimonials {
+      background: var(--primary);
+      color: #fff;
+      padding: 2em 1em;
+      text-align: center;
+    }
+    .testimonial-quote {
+      font-style: italic;
+      margin: 0.3em auto;
+      max-width: 550px;
+      font-size: 1.04em;
+    }
+    .footer {
+      background: var(--secondary);
+      color: #fff;
+      text-align: center;
+      padding: 1em;
+      font-size: 0.96em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4em;
+    }
+    .footer-links {
+      margin-top: 0.5em;
+      display: flex;
+      gap: 1.5em;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: #fff;
+      text-decoration: underline;
+      padding: 0.25em 0;
+    }
+    @media (max-width:650px) {
+      header {
+        flex-direction: column;
+        gap: 1em;
+        padding: 1em;
+      }
+      .features {
+        gap: 1em;
+        padding: 1em;
+      }
+      .feature-card {
+        padding: 1em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Kochi Metro Induction Planner</div>
+    <nav>
+      <a href="#">Dashboard</a>
+      <a href="#">Maintenance</a>
+      <a href="#">Branding</a>
+      <a href="#">Analytics</a>
+      <a href="#">About</a>
+      <a href="#">Login</a>
+    </nav>
+  </header>
+  <section class="hero">
+    <h1>Transform Train Induction.<br> Drive Operational Excellence.</h1>
+    <p>
+      Unified, real-time induction planning for Kochi Metro—maximize service readiness, minimize costs. <br>
+      Automate tonight’s decisions, optimize tomorrow’s fleet with AI-powered analytics and explainable insights.
+    </p>
+    <div class="cta">
+      <button>Book a Demo</button>
+      <button>Try Induction Simulator</button>
+    </div>
+  </section>
+  <section class="features">
+    <div class="feature-card">
+      <h3>Live Dashboard</h3>
+      <p>View every trainset’s readiness, certifications, and alerts instantly across your fleet.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Multi-Objective Optimizer</h3>
+      <p>Balance mileage, cleaning slots, branding, and maintenance — no more spreadsheets.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Explainable Decisions</h3>
+      <p>Ranked induction list with transparent rules and conflict alerts.</p>
+    </div>
+    <div class="feature-card">
+      <h3>What-If Simulator</h3>
+      <p>Test scenarios, forecast outcomes, and improve reliability each night.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Integrated Data</h3>
+      <p>Connect Maximo, IoT sensors, and manual inputs for seamless fleet control.</p>
+    </div>
+  </section>
+  <section class="testimonials">
+    <div class="testimonial-quote">“The induction planner dramatically simplified our nightly workflow — clear decisions, zero missed alerts.”</div>
+    <div class="testimonial-quote">“With real-time status and predictive modules, Kochi Metro sets new standards in punctuality and reliability.”</div>
+  </section>
+  <footer class="footer">
+    <div>Kochi Metro Induction Planner</div>
+    <div>Email: support@kochimetro-induction.com</div>
+    <div class="footer-links">
+      <a href="#">Support</a>
+      <a href="#">Terms</a>
+      <a href="#">Privacy</a>
+    </div>
+  </footer>
+</body>
+</html>
