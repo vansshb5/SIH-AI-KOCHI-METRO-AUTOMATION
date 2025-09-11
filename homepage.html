@@ -63,6 +63,31 @@
   </div>
 
   <script>
+    
+    document.getElementById("loginForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // stop page reload
+      
+      const workerType = document.getElementById("workerType").value;
+      
+      if (workerType === "rolling") {
+        window.location.href = "rolling.html";
+      } else if (workerType === "signalling") {
+        window.location.href = "signalling.html";
+      } else if (workerType === "telecom") {
+        window.location.href = "telecom.html";
+      } else if (workerType === "branding") {
+        window.location.href = "branding.html";
+      } else if (workerType === "cleaning") {
+        window.location.href = "cleaning.html";
+      } else if (workerType === "stabling") {
+        window.location.href = "stabling.html";
+      } else if (workerType === "supervisor") {
+        window.location.href = "results.html";
+      } else {
+        alert("Please select a category!");
+      }
+    });
+  
     const users = {
       "rolling":    {username:"rolling1", password:"pass123", redirect:"rolling.html"},
       "signalling": {username:"signal1",  password:"pass123", redirect:"signalling.html"},
