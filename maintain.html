@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Maintenance - Work Orders</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
+      color: #333;
+      line-height: 1.6;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      width: 100%;
+      background: #fff;
+      border-radius: 20px;
+      padding: 40px 30px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+      animation: fadeIn 1s ease;
+    }
+
+    h1 {
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 30px;
+      color: #0072ff;
+    }
+
+    h2 {
+      margin-bottom: 15px;
+      color: #0056b3;
+      font-size: 1.4rem;
+    }
+
+    .form-section {
+      margin: 25px 0;
+      padding: 20px;
+      background: #f4f9ff;
+      border-radius: 12px;
+      border: 1px solid #cce0ff;
+    }
+
+    label {
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    select {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #aaa;
+      font-size: 1rem;
+      transition: 0.3s;
+    }
+
+    select:focus {
+      border-color: #0072ff;
+      outline: none;
+      box-shadow: 0 0 8px rgba(0, 114, 255, 0.3);
+    }
+
+    input[type="radio"] {
+      margin-right: 8px;
+      accent-color: #0072ff;
+    }
+
+    button {
+      background: linear-gradient(90deg, #0072ff, #00c6ff);
+      color: #fff;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: 0.3s;
+      display: block;
+      width: 100%;
+      text-align: center;
+    }
+
+    button:hover {
+      background: linear-gradient(90deg, #005bb5, #0099cc);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 114, 255, 0.3);
+    }
+
+    .certificate {
+      margin-top: 25px;
+      padding: 18px;
+      border-radius: 10px;
+      font-size: 1rem;
+      animation: slideUp 0.5s ease;
+    }
+
+    .safe {
+      background: #e6ffe6;
+      border-left: 5px solid #28a745;
+      color: #1a661a;
+    }
+
+    .warning {
+      background: #fff6e6;
+      border-left: 5px solid #ff9800;
+      color: #a65c00;
+    }
+
+    .danger {
+      background: #ffe6e6;
+      border-left: 5px solid #ff0000;
+      color: #b30000;
+      font-weight: bold;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    @keyframes slideUp {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🚆 Maintenance - Work Orders</h1>
+
+    <h2>🚄 Select Train</h2>
+    <div class="form-section">
+      <label for="train">Choose a Train:</label>
+      <select id="train">
+        <option value="">-- Select a Train --</option>
+        <option value="T01">Train 101</option>
+        <option value="T02">Train 102</option>
+        <option value="T03">Train 103</option>
+        <option value="T04">Train 104</option>
+        <option value="T05">Train 105</option>
+        <option value="T06">Train 106</option>
+        <option value="T07">Train 107</option>
+        <option value="T08">Train 108</option>
+        <option value="T09">Train 109</option>
+        <option value="T10">Train 110</option>
+      </select>
+    </div>
+
+    <h2>📋 Work Order Status</h2>
+    <div class="form-section">
+      <label><input type="radio" name="status" value="open"> Open Work Orders</label><br>
+      <label><input type="radio" name="status" value="closed"> Closed Work Orders</label>
+    </div>
+
+    <button onclick="checkCertificate()">🔍 Check Fitness Certificate</button>
+    <div id="certificate-status"></div>
+  </div>
+
+ <script>
+async function checkCertificate() {
+  const train = document.getElementById("train").value;
+  const statusDiv = document.getElementById("certificate-status");
+
+  if (!train) {
+    statusDiv.innerHTML = `<div class="certificate warning">⚠ Please select a train first.</div>`;
+    return;
+  }
+
+  try {
+    const response = await fetch(`http://127.0.0.1:8000/fitness/${train}`);
+    const data = await response.json();
+
+    if (data.error) {
+      statusDiv.innerHTML = `<div class="certificate danger">❌ Train not found!</div>`;
+      return;
+    }
+
+    const daysLeft = data.Fitness_Valid_days_left;
+    let statusClass = "safe";
+    let message = `✅ Fitness Certificate is valid. ${daysLeft} days remaining.`;
+
+    if (daysLeft <= 15 && daysLeft > 5) {
+      statusClass = "warning";
+      message = `⚠ Fitness Certificate is expiring soon. ${daysLeft} days remaining.`;
+    } else if (daysLeft <= 5) {
+      statusClass = "danger";
+      message = `🚨 URGENT! Fitness Certificate expires in ${daysLeft} days!`;
+    }
+
+    statusDiv.innerHTML = `<div class="certificate ${statusClass}">${message}</div>`;
+  } catch (err) {
+    statusDiv.innerHTML = `<div class="certificate danger">❌ Error connecting to backend</div>`;
+  }
+}
+</script>
+</body>
+</html>

@@ -138,30 +138,33 @@
   </div>
 
   <script>
-    const users = {
-      "rolling":    {username:"rolling1", password:"pass123", redirect:"rolling.html"},
-      "signalling": {username:"signal1",  password:"pass123", redirect:"signalling.html"},
-      "telecom":    {username:"telecom1", password:"pass123", redirect:"telecom.html"},
-      "branding":   {username:"brand1",   password:"pass123", redirect:"branding.html"},
-      "cleaning":   {username:"clean1",   password:"pass123", redirect:"cleaning.html"},
-      "stabling":   {username:"stable1",  password:"pass123", redirect:"stabling.html"},
-      "supervisor": {username:"admin",    password:"admin123",redirect:"results.html"}
-    };
 
-    function loginUser(e) {
-      e.preventDefault();
-      const role = document.getElementById("role").value;
-      const uname = document.getElementById("username").value.trim();
-      const pwd = document.getElementById("password").value.trim();
-      const error = document.getElementById("error");
+  const users = {
+    "rolling":    {username:"rolling1", password:"123456"},
+    "signalling": {username:"signal1",  password:"123456"},
+    "telecom":    {username:"telecom1", password:"123456"},
+    "branding":   {username:"brand1",   password:"123456"},
+    "cleaning":   {username:"clean1",   password:"123456"},
+    "stabling":   {username:"stable1",  password:"123456"},
+    "supervisor": {username:"admin",    password:"123456"}
+  };
 
-      if (users[role] && users[role].username === uname && users[role].password === pwd) {
-        window.location.href = users[role].redirect;
-      } else {
-        error.innerText = "❌ Invalid credentials. Try again.";
-        error.style.display = "block";
-      }
+  function loginUser(e) {
+    e.preventDefault();
+    const role = document.getElementById("role").value;
+    const uname = document.getElementById("username").value.trim();
+    const pwd = document.getElementById("password").value.trim();
+    const error = document.getElementById("error");
+
+    if (users[role] && users[role].username === uname && users[role].password === pwd) {
+      window.location.href = "homepage.html";  // ✅ Redirect to homepage
+    } else {
+      error.innerText = "❌ Invalid credentials. Try again.";
+      error.style.display = "block";
     }
+  }
+
+
   </script>
 </body>
 </html>
