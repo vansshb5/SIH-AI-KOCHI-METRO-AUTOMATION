@@ -1,0 +1,11 @@
+Train_ID,Fitness_Valid_days_left,JobCards_Open,Branding_Hours_Left,Mileage_Remaining_km,Cleaning_Slot_Available,Stable_Position_Score,Ready_For_Service,Readiness_Score,Category
+T01,15,0,48,1200,Yes,0.9,Yes,101,Service
+T08,12,1,18,1000,Yes,0.85,Yes,80,Service
+T05,20,3,60,1500,No,0.8,Yes,73,Maintenance
+T03,7,1,24,800,Yes,0.7,Yes,64,Service
+T06,10,0,8,400,Yes,0.5,Yes,54,Service
+T09,5,0,10,350,Yes,0.6,Yes,52,Service
+T10,8,2,40,600,No,0.7,No,49,Standby
+T04,1,0,5,200,Yes,0.6,No,47,Standby
+T02,3,2,12,300,No,0.4,No,24,Standby
+T07,2,4,30,250,No,0.3,No,23,Maintenance
